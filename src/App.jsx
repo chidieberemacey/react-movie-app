@@ -1,35 +1,24 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import React from 'react';
+import { useEffect } from "react";
 
-const Person = (props) => {
-  return (
-    <div>
-      {props.name ? <h3>Name: {props.name}</h3> : 'hello'}
-       
-       <h3>Age: {props.age}</h3>
-    </div>
-  )
-}
+// import Counter from './Counter';
 
+// 9c0d6e94
+const API_URL = 'http://www.omdbapi.com?apikey=9c0d6e94';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [sum, setSum] = useState(5);
 
-  useEffect(()=> setCount(0),[]);
+  const searchMovies = async(title) => {
+    const response = await fetch(`${API_URL}&s=${title}`);
+    const data = await response.json();
 
-  let dope = () => {setCount((prevcount)=> prevcount + 1)}
-  let sly = () => {setCount((prevcount)=> prevcount - 1)}
-
+    console.log(data)
+  }
+  useEffect(() => {searchMovies('superman')}
+  ,[]);
   return (
-    <div className='Counter-app'>
-      <Person name='John' age={24} />
-      <button onClick={dope}>+</button>
-      <h4>{count}</h4>
-      <button onClick={sly}>-</button>
-      <button onClick={()=> setSum(()=> sum + count)}>add</button>
-      <h4>{sum}</h4>
+    <div>
+      App
+      {/* <Counter /> */}
     </div>
   )
 }
